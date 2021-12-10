@@ -1,5 +1,5 @@
 # go-hue
-> Control Philips Hue Lamps via Lua
+> Control Philips Hue Lamps with Lua
 
 ## About
 
