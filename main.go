@@ -3,7 +3,6 @@ package main
 import (
 	"encoding/xml"
 	"flag"
-	"fmt"
 	"io/ioutil"
 	"log"
 	"net/http"
@@ -154,7 +153,6 @@ func main() {
 	}
 	l.SetGlobal("bridges")
 
-	fmt.Println(*interval)
 	if (*interval) == -1 {
 		if err := l.DoFile(script); err != nil {
 			logError(err.Error())
