@@ -3,10 +3,10 @@ package main
 import (
 	"encoding/xml"
 	"flag"
+	"fmt"
 	"io/ioutil"
 	"log"
 	"net/http"
-	"os"
 	"regexp"
 	"time"
 
@@ -56,7 +56,7 @@ func main() {
 		}
 	}
 
-	script := os.Args[1]
+	script := flag.Args()[0]
 	if script == "" {
 		logError("script must be provided to be executed.")
 	}
@@ -154,6 +154,7 @@ func main() {
 	}
 	l.SetGlobal("bridges")
 
+	fmt.Println(*interval)
 	if (*interval) == -1 {
 		if err := l.DoFile(script); err != nil {
 			logError(err.Error())

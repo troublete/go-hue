@@ -143,7 +143,7 @@ func (b Bridge) SetLightState(username string, id string, state LightState) {
 		logError(bodyErr.Error())
 	}
 
-	fmt.Printf("set light '%s'\n", id)
+	fmt.Printf("hue: set light '%s'\n", id)
 	req, reqErr := http.NewRequest(http.MethodPut, b.BaseUrl+"api/"+username+"/lights/"+id+"/state", bytes.NewBuffer(body))
 	if reqErr != nil {
 		logError(reqErr.Error())
