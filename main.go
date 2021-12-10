@@ -19,7 +19,7 @@ func logError(err string) {
 }
 
 func main() {
-	interval := flag.Int64("interval", 1, "Set the interval in seconds in which the provided script is run.")
+	interval := flag.Int64("interval", 1000, "Set the interval in milliseconds in which the provided script is run.")
 	flag.Parse()
 
 	list, err := ssdp.Search(ssdp.All, 1, "")
@@ -163,7 +163,7 @@ func main() {
 			logError(err.Error())
 		}
 
-		time.Sleep(time.Second * time.Duration(*interval))
+		time.Sleep(time.Millisecond * time.Duration(*interval))
 		c = c + 1
 	}
 }
