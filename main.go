@@ -19,7 +19,7 @@ func logError(err string) {
 }
 
 func main() {
-	interval := flag.Int64("interval", 1000, "Set the interval in milliseconds in which the provided script is run.")
+	interval := flag.Int64("interval", -1, "Set the interval in milliseconds in which the provided script is run.")
 	flag.Parse()
 
 	list, err := ssdp.Search(ssdp.All, 1, "")
@@ -154,16 +154,22 @@ func main() {
 	}
 	l.SetGlobal("bridges")
 
-	c := 1
-	for {
-		l.PushInteger(int64(c))
-		l.SetGlobal("loop")
-
+	if (*interval) == -1 {
 		if err := l.DoFile(script); err != nil {
 			logError(err.Error())
 		}
+	} else {
+		c := 1
+		for {
+			l.PushInteger(int64(c))
+			l.SetGlobal("loop")
 
-		time.Sleep(time.Millisecond * time.Duration(*interval))
-		c = c + 1
+			if err := l.DoFile(script); err != nil {
+				logError(err.Error())
+			}
+
+			time.Sleep(time.Millisecond * time.Duration(*interval))
+			c = c + 1
+		}
 	}
 }
